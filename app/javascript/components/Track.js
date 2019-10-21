@@ -63,11 +63,12 @@ class Track extends React.Component {
         const filteredData = data.filter(card => card.category == category);
 
         if(filteredData.length < 1){
-            const new_card = this.createCard()
-            filteredData.push(new_card)
+            this.createCard()
         }
-        filteredData.sort((a,b) => {return a.id - b.id})
-        this.setState({filteredData})
+        else {
+            filteredData.sort((a,b) => {return a.id - b.id})
+            this.setState({filteredData})
+        }
     }
 
     handleChangeData = (id, input_name, value) => {

@@ -1,7 +1,12 @@
 export const categories = [
     'sleep',
     'hygiene',
-    'food'
+    'food',
+    'workout',
+    'readings',
+    'clean',
+    'events',
+    'journal'
 ]
 
 export const card_template = (category, date) => {
@@ -88,6 +93,156 @@ export const card_template = (category, date) => {
                         input_type: 'text_field',
                         value: null
                     }
+                ]
+            }  
+            return data;
+        case 'workout':
+            data = {
+                date: date,
+                category: 'workout',
+                data: [
+                    {
+                        input_name: 'exercise_type',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'weight',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'amount',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'reps',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'time',
+                        input_type: 'time_picker',
+                        value: null
+                    }
+                ]
+            }  
+            return data;
+        case 'readings':
+            data = {
+                date: date,
+                category: 'readings',
+                data: [
+                    {
+                        input_name: 'title',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'time_start',
+                        input_type: 'time_picker',
+                        value: null
+                    },
+                    {
+                        input_name: 'time_end',
+                        input_type: 'time_picker',
+                        value: null
+                    },
+                    {
+                        input_name: 'page_start',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'page_end',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'url',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'notes',
+                        input_type: 'text_field',
+                        value: null
+                    }
+                ]
+            }  
+            return data;
+        case 'clean':
+            data = {
+                date: date,
+                category: 'clean',
+                data: [
+                    {
+                        input_name: 'clean_time',
+                        input_type: 'time_picker',
+                        value: null
+                    },
+                    {
+                        input_name: 'room_clean_%',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'kitchen_clean_%',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'bathroom_clean_%',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'livingroom_clean_%',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                ]
+            }  
+            return data;
+        case 'events':
+            data = {
+                date: date,
+                category: 'events',
+                data: [
+                    {
+                        input_name: 'label',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'time',
+                        input_type: 'time_picker',
+                        value: null
+                    },
+                    {
+                        input_name: 'notes',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                ]
+            }  
+            return data;
+        case 'journal':
+            data = {
+                date: date,
+                category: 'journal',
+                data: [
+                    {
+                        input_name: 'mood',
+                        input_type: 'text_field',
+                        value: null
+                    },
+                    {
+                        input_name: 'journal',
+                        input_type: 'text_field',
+                        value: null
+                    },
                 ]
             }  
             return data;
