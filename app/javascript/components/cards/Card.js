@@ -5,11 +5,14 @@ import CardLibrary from './CardLibrary'
 class Card extends React.Component {
     
     render() {
-        const {card, index} = this.props;
+        const {card, index, onDelete} = this.props;
         return (
             <div className="card">
-                <div>{card.category}</div>
-                {card.input_data.map((ultimate_data, key) => {
+                <div className="card_title_container">
+                    <div className="card_title">{card.category}</div>
+                    <p onClick={onDelete}>X</p>
+                </div>
+                {card.data.map((ultimate_data, key) => {
                     return (
                         <CardLibrary 
                             key={key}

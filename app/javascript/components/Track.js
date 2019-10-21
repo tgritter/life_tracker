@@ -2,73 +2,15 @@ import React from 'react'
 import Calendar from 'react-calendar';
 import Header from './ui/Header'
 import TrackCategory from './ui/TrackCategory'
+import {KeyboardDatePicker} from '@material-ui/pickers';
 import Card from './cards/Card'
-import AddButton from './ui/AddButton'; 
+import {card_template, categories} from '../template/Card'
+import axios from 'axios'
+import update from 'immutability-helper' 
+import Icon from '@material-ui/core/Icon'; 
+import Button from './ui/Button'
 
-const categories = [
-    'sleep',
-    'oral_hygiene',
-    'hygiene'
-]
-
-const test_data = [
-    {
-        id: 100,
-        date: null,
-        category: 'sleep',
-        input_data: [
-            {
-                input_name: 'sleep_time',
-                input_type: 'time_picker',
-                value: null
-            },
-            {
-                input_name: 'awake_time',
-                input_type: 'time_picker',
-                value: null
-            },
-        ]
-    },
-    {
-        id: 101,
-        date: null,
-        category: 'oral_hygiene',
-        input_data: [
-            {
-                input_name: 'brush_time_start',
-                input_type: 'time_picker',
-                value: null
-            },
-            {
-                input_name: 'floss_time_start',
-                input_type: 'time_picker',
-                value: null
-            },
-        ]
-    },
-    {
-        id: 102,
-        date: null,
-        category: 'hygiene',
-        input_data: [
-            {
-                input_name: 'shower_time',
-                input_type: 'time_picker',
-                value: null
-            },
-            {
-                input_name: 'shave_time',
-                input_type: 'time_picker',
-                value: null
-            },
-            {
-                input_name: 'deodrant_time',
-                input_type: 'time_picker',
-                value: null
-            }
-        ]
-    }         
-]
+var moment = require('moment');
 
 class Track extends React.Component {
 
@@ -77,74 +19,174 @@ class Track extends React.Component {
         this.state = {
             category: 'sleep',
             date: new Date(),
-            data: test_data
+            data: [],
+            loading: true,
+            filteredData: []
         };
     }
 
-    onChangeDate = date => this.setState({ date })
-
-    onChangeCategory = category => {
-        this.setState({category})
+    componentDidMount(){
+        this.getCards();
     }
 
-    filterData = (data) => {
-        const {category} = this.state;
-        const filtered_data = data.filter(card => card.category == category);
-
-        return filtered_data
+    getCards(date) {
+        axios.get('/api/v1/cards?date=' + moment(date).format('YYYY-MM-DD'))
+        .then(response => {
+            console.log('Response: ', response)
+            this.setState({
+                data: response.data,
+                loading: false
+            })
+            this.filterData()
+        })
+        .catch(error => console.log(error))
     }
 
-    handleChangeData = (id, name, value) => {
-        const array = [...this.state.data];
-        const card_index = array.findIndex(x => x.id === id);
-        const input_index = array[card_index].input_data.findIndex(x => x.inputName === name);
+    onChangeDate = (date) => {
+        this.setState({ date })
+        this.getCards(date)
+    }
 
-        array[card_index].input_data[input_index]['value'] = value;
-        this.setState({filtered_data: array})
+    handleDateChange = date => {
+        this.setState({ date })
+        this.getCards(date)
     };
 
-    addToArray = (category) => {
-        // const array = this.state[category];
+    onChangeCategory = category => {
+        this.setState({category}, () => {
+            this.filterData()
+        })
+    }
 
-        // if(category === 'readings'){
-        //     array.push(new readings())
-        // }
+    filterData = () => {
+        const {data, category} = this.state;
+        const filteredData = data.filter(card => card.category == category);
 
-        // this.setState({[category]: array})
-        console.log('Category: ', category);
+        if(filteredData.length < 1){
+            const new_card = this.createCard()
+            filteredData.push(new_card)
+        }
+        filteredData.sort((a,b) => {return a.id - b.id})
+        this.setState({filteredData})
+    }
+
+    handleChangeData = (id, input_name, value) => {
+        const array = [...this.state.filteredData];
+        console.log('Data: ', array)
+        const card_index = id ? array.findIndex(x => x.id === id) : 0;
+        const input_index = array[card_index].data.findIndex(x => x.input_name === input_name);
+        
+        array[card_index].data[input_index].value = value;
+        this.setState({data: array}, () => this.filterData())
+    };
+
+    createCard = () => {
+        const {category, date} = this.state;
+        const dateString = moment(date).format('YYYYMMDD')
+        let newCard = card_template(category, dateString)
+        axios.post('/api/v1/cards', {card: newCard})
+        .then(response => {
+            console.log('Response: ', response)
+            const data = update(this.state.data, {
+                $splice: [[0, 0, response.data]]
+            })
+            this.setState({
+                data: data
+            },() => this.filterData())
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    onSave = () => {
+        const {filteredData} = this.state;
+
+        for(var i = 0; i < filteredData.length; i++){
+            const data = filteredData[i]
+            axios.put('/api/v1/cards/' + data.id, {
+                card: data
+            })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(err);
+            });
+        }
+    }
+
+    onDelete = (card) => {
+        axios.delete(`/api/v1/cards/${card.id}`)
+        .then(response => {
+            console.log('Response: ', response)
+            const cardIndex = this.state.data.findIndex(x => x.id === card.id)
+            const cards = update(this.state.data, {
+                $splice: [[cardIndex, 1]]
+            })
+            this.setState({
+                data: cards
+            },() => this.filterData())
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 
     render() {
-        const {date, data, category} = this.state;
-        return (
-            <div>
-                <Header/>
-                <div className="calendar">
-                    <Calendar
-                        onChange={this.onChangeDate}
-                        value={date}
-                    />
+        if(this.state.loading) {
+            return(
+                <div className="main">
+                    <Header/>
+                    <div>Loading</div>
                 </div>
-                <div className="form_container">
-                    <TrackCategory
-                        categories={categories} 
-                        handleClick={this.onChangeCategory}
+            )
+        }
+        else {
+            const {date, filteredData, category} = this.state;
+
+            return (
+                <div className="main">
+                    <Header/>
+                    <div className="calendar">
+                    <KeyboardDatePicker
+                        disableToolbar
+                        variant="inline"
+                        format="DD-MM-YYYY"
+                        margin="normal"
+                        id="date-picker-inline"
+                        label="Date Picker"
+                        value={date}
+                        onChange={this.handleDateChange}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
                     />
-                    <div className="cards_array">
-                        {this.filterData(data).map((card, index) => {
-                            return (
-                                <Card 
-                                    key={index}
-                                    index={index}
-                                    card={card}
-                                    handleChange={this.handleChangeData}
-                                /> 
-                        )})}
-                        <AddButton onClick={() => this.addToArray(category)} />
+                    </div>
+                    <div className="form_container">
+                        <TrackCategory
+                            category={category}
+                            categories={categories} 
+                            handleClick={this.onChangeCategory}
+                        />
+                        <div className="cards_array">
+                            {filteredData.map((card, index) => {
+                                return (
+                                    <Card 
+                                        key={index}
+                                        index={index}
+                                        card={card}
+                                        handleChange={this.handleChangeData}
+                                        onDelete={() => this.onDelete(card, index)}
+                                    /> 
+                            )})}
+                            <Button onClick={() => this.createCard()} icon="Add" />
+                        </div>
+                        <Button onClick={() => this.onSave()} icon="Save" />
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
 

@@ -3,11 +3,20 @@ import React from 'react'
 class TrackCategory extends React.Component {
 
     renderTrackCategory = (category) => {
-        return(
-            <p key={category} onClick={() => this.props.handleClick(category)}>
-                {category[0].toUpperCase() + category.slice(1)}
-            </p>
-        )
+        if(this.props.category === category){
+            return(
+                <h1 key={category} onClick={() => this.props.handleClick(category)}>
+                    {category[0].toUpperCase() + category.slice(1)}
+                </h1>
+            )
+        }
+        else {
+            return(
+                <p key={category} onClick={() => this.props.handleClick(category)}>
+                    {category[0].toUpperCase() + category.slice(1)}
+                </p>
+            )
+        }
     }
 
     render() {

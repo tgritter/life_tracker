@@ -1,6 +1,7 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import {KeyboardTimePicker} from '@material-ui/pickers';
+var moment = require('moment');
 
 class CardLibrary extends React.Component {
 
@@ -31,11 +32,11 @@ class CardLibrary extends React.Component {
                     />
                 )
             break;
-            case 'TextField':
+            case 'text_field':
                 return (
                     <TextField
                         id={ultimate_data.type}
-                        label={ultimate_data.label}
+                        label={ultimate_data.input_name}
                         value={ultimate_data.value}
                         onChange={this.handleChange('name')}
                         margin="normal"

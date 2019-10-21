@@ -9,16 +9,21 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles/';
 
 const customTheme = createMuiTheme({
+    icon: {
+        primary: "#818181",
+        secondary: "#818181"
+    },
     palette: {
-        background: {
-            paper: '#006494',
+        icon: {
+            primary: "#818181",
+            secondary: "#818181"
         },
         text: {
-            primary: "#ffffff",
-            secondary: "#00000"
+            primary: "#818181",
+            secondary: "#818181"
         },
         primary: {
-          main: '#fff',
+          main: '#818181',
         },
     },
 })
