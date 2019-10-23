@@ -236,12 +236,12 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'mood',
                         input_type: 'text_field',
-                        value: 'test'
+                        value: ''
                     },
                     {
                         input_name: 'journal',
                         input_type: 'text_field',
-                        value: 'test'
+                        value: ''
                     }, 
                 ]
             }  
