@@ -71,7 +71,7 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'meal_type',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'meal_time',
@@ -81,17 +81,17 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'food_type',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'cost',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'calories',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     }
                 ]
             }  
@@ -104,22 +104,22 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'exercise_type',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'weight',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'amount',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'reps',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'time',
@@ -137,7 +137,7 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'title',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'time_start',
@@ -152,22 +152,22 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'page_start',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'page_end',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'url',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'notes',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     }
                 ]
             }  
@@ -185,22 +185,22 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'room_clean_%',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'kitchen_clean_%',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'bathroom_clean_%',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'livingroom_clean_%',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                 ]
             }  
@@ -213,7 +213,7 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'label',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                     {
                         input_name: 'time',
@@ -223,7 +223,7 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'notes',
                         input_type: 'text_field',
-                        value: null
+                        value: ''
                     },
                 ]
             }  
@@ -236,13 +236,13 @@ export const card_template = (category, date) => {
                     {
                         input_name: 'mood',
                         input_type: 'text_field',
-                        value: null
+                        value: 'test'
                     },
                     {
                         input_name: 'journal',
                         input_type: 'text_field',
-                        value: null
-                    },
+                        value: 'test'
+                    }, 
                 ]
             }  
             return data;

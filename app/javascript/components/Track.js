@@ -73,10 +73,10 @@ class Track extends React.Component {
 
     handleChangeData = (id, input_name, value) => {
         const array = [...this.state.filteredData];
-        console.log('Data: ', array)
         const card_index = id ? array.findIndex(x => x.id === id) : 0;
+        console.log('array[card_index].data: ', array[card_index].data)
+        console.log('input_name: ', input_name)
         const input_index = array[card_index].data.findIndex(x => x.input_name === input_name);
-        
         array[card_index].data[input_index].value = value;
         this.setState({data: array}, () => this.filterData())
     };

@@ -6,8 +6,8 @@ var moment = require('moment');
 class CardLibrary extends React.Component {
 
     handleChange = name => event => {
-        const {handleChange} = this.props;
-        handleChange()
+        const {card, handleChange} = this.props;
+        handleChange(card.id, name, event.target.value)
     };
 
     handleChangeTime = (name, time) => {
@@ -33,12 +33,13 @@ class CardLibrary extends React.Component {
                 )
             break;
             case 'text_field':
+                console.log('UltimateData: ', ultimate_data.value)
                 return (
                     <TextField
                         id={ultimate_data.type}
                         label={ultimate_data.input_name}
                         value={ultimate_data.value}
-                        onChange={this.handleChange('name')}
+                        onChange={this.handleChange(ultimate_data.input_name)}
                         margin="normal"
                         variant="outlined"
                     />
