@@ -1,15 +1,12 @@
 import React from 'react'
-import Calendar from 'react-calendar';
 import Header from './ui/Header'
 import TrackCategory from './ui/TrackCategory'
 import {KeyboardDatePicker} from '@material-ui/pickers';
 import Card from './cards/Card'
-import {card_template, categories} from '../template/Card'
+import {card_template, categories} from '../template/Categories'
 import axios from 'axios'
 import update from 'immutability-helper' 
-import Icon from '@material-ui/core/Icon'; 
 import Button from './ui/Button'
-
 var moment = require('moment');
 
 class Track extends React.Component {

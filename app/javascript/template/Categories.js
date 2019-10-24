@@ -1,10 +1,13 @@
 export const categories = [
     'sleep',
     'hygiene',
+    'grooming',
     'food',
     'workout',
     'readings',
     'clean',
+    'medications',
+    'drugs', 
     'events',
     'journal'
 ]
@@ -51,17 +54,40 @@ export const card_template = (category, date) => {
                         value: null
                     },
                     {
-                        input_name: 'shave_time',
-                        input_type: 'time_picker',
-                        value: null
-                    },
-                    {
                         input_name: 'deodrant_time',
                         input_type: 'time_picker',
                         value: null
                     }
                 ]
             }  
+        return data;
+        case 'grooming':
+                data = {
+                    date: date,
+                    category: 'hygiene',
+                    data: [
+                        {
+                            input_name: 'shave_time',
+                            input_type: 'time_picker',
+                            value: null
+                        },
+                        {
+                            input_name: 'clip_finger_nails',
+                            input_type: 'time_picker',
+                            value: null
+                        },
+                        {
+                            input_name: 'clip_toe_nails',
+                            input_type: 'time_picker',
+                            value: null
+                        },
+                        {
+                            input_name: 'hair_cut',
+                            input_type: 'time_picker',
+                            value: null
+                        },
+                    ]
+                }  
             return data;
         case 'food':
             data = {
@@ -205,6 +231,42 @@ export const card_template = (category, date) => {
                 ]
             }  
             return data;
+        case 'medications':
+                data = {
+                    date: date,
+                    category: 'medications',
+                    data: [
+                        {
+                            input_name: 'medication_type',
+                            input_type: 'text_field',
+                            value: ''
+                        },
+                        {
+                            input_name: 'medication_time',
+                            input_type: 'time_picker',
+                            value: null
+                        },
+                    ]
+                }
+                return data;
+        case 'drugs':
+                data = {
+                    date: date,
+                    category: 'drugs',
+                    data: [
+                        {
+                            input_name: 'drug_type',
+                            input_type: 'text_field',
+                            value: ''
+                        },
+                        {
+                            input_name: 'drug_time',
+                            input_type: 'time_picker',
+                            value: null
+                        },
+                    ]
+                }
+                return data;
         case 'events':
             data = {
                 date: date,
