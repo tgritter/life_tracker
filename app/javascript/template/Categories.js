@@ -6,10 +6,10 @@ export const categories = [
     'workout',
     'readings',
     'clean',
-    'medications',
     'drugs', 
     'events',
-    'journal'
+    'journal',
+    'completed'
 ]
 
 export const card_template = (category, date) => {
@@ -64,7 +64,7 @@ export const card_template = (category, date) => {
         case 'grooming':
                 data = {
                     date: date,
-                    category: 'hygiene',
+                    category: 'grooming',
                     data: [
                         {
                             input_name: 'shave_time',
@@ -192,7 +192,7 @@ export const card_template = (category, date) => {
                     },
                     {
                         input_name: 'notes',
-                        input_type: 'text_field',
+                        input_type: 'text_area_autosize',
                         value: ''
                     }
                 ]
@@ -231,24 +231,6 @@ export const card_template = (category, date) => {
                 ]
             }  
             return data;
-        case 'medications':
-                data = {
-                    date: date,
-                    category: 'medications',
-                    data: [
-                        {
-                            input_name: 'medication_type',
-                            input_type: 'text_field',
-                            value: ''
-                        },
-                        {
-                            input_name: 'medication_time',
-                            input_type: 'time_picker',
-                            value: null
-                        },
-                    ]
-                }
-                return data;
         case 'drugs':
                 data = {
                     date: date,
@@ -284,9 +266,9 @@ export const card_template = (category, date) => {
                     },
                     {
                         input_name: 'notes',
-                        input_type: 'text_field',
+                        input_type: 'text_area_autosize',
                         value: ''
-                    },
+                    }
                 ]
             }  
             return data;
@@ -301,12 +283,25 @@ export const card_template = (category, date) => {
                         value: ''
                     },
                     {
-                        input_name: 'journal',
-                        input_type: 'text_field',
+                        input_name: 'notes',
+                        input_type: 'text_area_autosize',
                         value: ''
-                    }, 
+                    }
                 ]
             }  
+            return data;
+        case 'completed':
+            data = {
+                date: date,
+                category: 'completed',
+                data: [
+                    {
+                        input_name: 'completed_time',
+                        input_type: 'time_picker',
+                        value: null
+                    },
+                ]
+            }
             return data;
         default: return null;
     }

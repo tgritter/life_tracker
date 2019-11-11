@@ -1,6 +1,7 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import {KeyboardTimePicker} from '@material-ui/pickers';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 var moment = require('moment');
 
 class CardLibrary extends React.Component {
@@ -42,6 +43,17 @@ class CardLibrary extends React.Component {
                         onChange={this.handleChange(ultimate_data.input_name)}
                         margin="normal"
                         variant="outlined"
+                    />
+                )
+            break;
+            case 'text_area_autosize':
+                return (
+                    <TextareaAutosize 
+                        aria-label="minimum height" 
+                        rows={3} 
+                        placeholder={ultimate_data.input_name}
+                        value={ultimate_data.value}
+                        onChange={this.handleChange(ultimate_data.input_name)}
                     />
                 )
             break;

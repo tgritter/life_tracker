@@ -4,6 +4,9 @@ class CardsController < ApplicationController
   def index
     if params[:date]   
       cards = Card.where(date: params[:date])
+    elsif params[:category]
+      cards = Card.where(:created_at => params[:dateAgo]..DateTime.now)
+      cards = cards.where(category: params[:category])
     else 
       cards = Card.order("created_at DESC")
     end

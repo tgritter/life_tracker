@@ -37,8 +37,8 @@ class App extends React.Component {
                     <div>
                         <Switch>
                             <Route exact path="/" component={Track} />
-                            <Route exact path="/tasks" component={Tasks} />
                             <Route exact path="/data" component={Data} />
+                            <Route exact path="/tasks" component={Tasks} />
                         </Switch>
                     </div>
                 </MuiPickersUtilsProvider>
