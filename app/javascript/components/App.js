@@ -41,6 +41,7 @@ class App extends React.Component {
                             <Route exact path="/tasks" component={Tasks} />
                         </Switch>
                     </div>
+            
                 </MuiPickersUtilsProvider>
             </MuiThemeProvider>
         )
