@@ -18,7 +18,7 @@
     "babel-plugin-import": "^1.12.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "immutability-helper": "^3.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-calendar": "^2.19.2",
